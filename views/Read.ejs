@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habtshi Blogs</title>
+    <link rel="stylesheet" href="/css/Read.css">
+</head>
+<body>
+    <h1>Habtshi Blogs</h1>
+    <div class="blogs">
+        <% files.forEach(function(file, index) { %>
+            <button onclick="displayBlog('<%= file.blog %>', <%= JSON.stringify(file.images) %>)">
+                <%= file.blog_topic %>
+            </button><br>
+        <% }) %>
+    </div>
+    <div>
+        <textarea name="main" id="main" placeholder="Your blog" disabled></textarea>
+        <h2>Image Previews:</h2>
+        <div id="imagePreviewContainer"></div>
+    </div>
+
+    <script>
+        function displayBlog(blogContent, images) {
+            // Set the blog content
+            document.getElementById('main').value = blogContent;
+
+            // Clear any existing image previews
+            const previewContainer = document.getElementById('imagePreviewContainer');
+            previewContainer.innerHTML = '';
+
+            // Display images
+            images.forEach(imageBuffer => {
+                const img = document.createElement('img');
+                img.src = 'data:image/png;base64,' + arrayBufferToBase64(imageBuffer.data);
+                img.style.maxWidth = '300px';
+                img.style.margin = '10px';
+                previewContainer.appendChild(img);
+            });
+        }
+
+        // Convert binary buffer to base64 string
+        function arrayBufferToBase64(buffer) {
+            let binary = '';
+            const bytes = new Uint8Array(buffer);
+            const len = bytes.byteLength;
+            for (let i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
+        }
+    </script>
+</body>
+</html>

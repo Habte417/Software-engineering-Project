@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="new.css">
+</head>
+<body>
+    <h1>Create your blog</h1>
+    <form action="/save" method="post" enctype="multipart/form-data" >
+    <div class="topic">
+    <textarea name="name" id="name" placeholder="write the top"></textarea><br></div>
+    <div class="text">
+    <textarea name="blog" id="blog" placeholder="write your blog" ></textarea><br>
+    </div>
+    <h1>Upload Multiple Images</h1><br><br>
+    <input class="button"type="file" id="imageInput" name="images" accept="image/*" multiple onchange="previewImages()">
+    <br><br>
+    <div id="imagePreviewContainer"></div>
+    <div class="buttons">
+    <button type="submit">save</button>
+    </form>
+    <form action="/backtohomepage">
+    <button>Back to homepage</button>
+    </form>
+    </div>
+</body>
+</html>
