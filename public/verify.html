@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Account</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("Verify").addEventListener("click", function() {
+                const username = document.getElementById("email").value;
+                const verificationCode = document.getElementById("verificationCode").value;
+    
+                // Make a POST request to verify the code
+                fetch('/verify-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, verificationCode }),
+                })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "Verification successful") {
+                        alert("Account created successfully.");
+                        window.location.href = '/index.html';  // Redirect to login or homepage
+                    } else {
+                        alert("Invalid verification code.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+    
+</head>
+<body>
+    <label>Email</label>
+    <input id="email" type="text"><br>
+    <label>Enter Verification Code</label>
+    <input id="verificationCode" type="text"><br>
+    <button id="Verify">Verify</button>
+</body>
+</html>

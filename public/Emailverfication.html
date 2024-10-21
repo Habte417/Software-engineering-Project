@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("Submit").addEventListener("click", function(event) {
+                event.preventDefault();  // Prevent the form from submitting the traditional way
+
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                const domain = "@my.smsu.edu";
+
+                // Check if the email ends with @my.smsu.edu
+                if (!email.endsWith(domain)) {
+                    alert("Only emails with '@my.smsu.edu' are allowed.");
+                } else {
+                    // Make a POST request to the back-end to send the verification code
+                    fetch('/created', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email, password }),
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert("Verification code sent to your email. Please enter the code to complete registration.");
+                        window.location.href = '/verify.html';  // Redirect to the verification code page
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <label>Email</label>
+    <input id="email" type="text"><br>
+    <label>Password</label>
+    <input id="password" type="password"><br>
+    <button id="Submit">Submit</button>
+</body>
+</html>
