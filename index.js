@@ -55,10 +55,36 @@ const upload = multer();
 const transporter = nodemailer.createTransport({
     service: 'gmail', // Replace this with your email service provider
     auth: {
-        user: '',  // Your email
-        pass: ''     // Your email password or an app-specific password if using Gmail
+        user: 'thabtamu417@gmail.com',  // Your email
+        pass: 'txyr dbcl mbsp dymw'     // Your email password or an app-specific password if using Gmail
     }
 });
+app.post("/About", async (req, res) => {
+    const { firstname, lastname, department,faculty,interested_about } = req.body;
+    const email = `${firstname.trim().toLowerCase()}.${lastname.trim().toLowerCase()}@my.smsu.edu`;
+
+    try {
+        // Check if a user with this email exists
+        const result = await db.query("SELECT username FROM accounts WHERE username = $1", [email]);
+
+        if (result.rows.length > 0) {
+            // If a matching user is found, update their record with firstname, lastname, department, and interested_about
+            await db.query(
+                "UPDATE accounts SET firstname = $1, lastname = $2, department = $3, faculty=$4 , interested_about = $5 WHERE username = $6",
+                [firstname.trim(), lastname.trim(), department, faculty, interested_about, email]
+            );
+            // Send the homepage
+            res.sendFile(__dirname + "/public/homepage.html");
+        } else {
+            // If no matching user is found, send the index page
+            res.sendFile(__dirname + "/public/index.html");
+        }
+    } catch (err) {
+        console.error("Error executing query", err.stack);
+        res.status(500).send("Server error");
+    }
+});
+
 
 
 // Temporarily store user data until verification
@@ -187,8 +213,9 @@ app.get("/Read", (req, result) => {
 });
 
 app.get("/forgot_password", (req, res) => {
-    res.sendFile(__dirname + "/public/resetpassword.html");
+    res.sendFile(__dirname + "/public/Forgotpass.html");
 });
+
 
 // Handling password update
 app.post("/update", (req, res) => {
@@ -217,6 +244,68 @@ app.post("/update", (req, res) => {
         }
     });
 });
+app.post("/forgot-password-request", (req, res) => {
+    const { email } = req.body;
+
+    if (!email.endsWith("@my.smsu.edu")) {
+        return res.status(400).send("Only @my.smsu.edu emails are allowed.");
+    }
+
+    // Check if user exists
+    db.query("SELECT username FROM accounts WHERE username = $1", [email], (err, result) => {
+        if (err) {
+            console.error("Error executing query", err.stack);
+            return res.status(500).send("Server error");
+        }
+
+        if (result.rows.length === 0) {
+            return res.status(404).send("No user found with this email.");
+        }
+
+        // Generate a 6-digit verification code
+        const verificationCode = crypto.randomInt(100000, 999999).toString();
+        pendingVerification[email] = { verificationCode };
+
+        // Email the verification code
+        const mailOptions = {
+            from: 'thabtamu417@gmail.com',
+            to: email,
+            subject: 'Your Password Reset Verification Code',
+            text: `Your verification code is ${verificationCode}. Please enter this code to reset your password.`,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error("Error sending email:", error.stack);
+                return res.status(500).send("Error sending verification code.");
+            } else {
+                console.log("Verification code sent:", info.response);
+                res.status(200).send("Verification code sent to your email.");
+            }
+        });
+    });
+});
+
+app.post("/reset-password", (req, res) => {
+    const { email, verificationCode, newPassword } = req.body;
+
+    if (!pendingVerification[email] || pendingVerification[email].verificationCode !== verificationCode) {
+        return res.status(400).send("Invalid or expired verification code.");
+    }
+
+    // Update password in the database
+    db.query("UPDATE accounts SET passwords = $1 WHERE username = $2", [newPassword, email], (err, result) => {
+        if (err) {
+            console.error("Error updating password:", err.stack);
+            return res.status(500).send("Error resetting password.");
+        }
+
+        // Remove the verification data after successful password reset
+        delete pendingVerification[email];
+        res.status(200).send("Password reset successful. You can now log in with your new password.");
+    });
+});
+
 
 app.get("/backtohomepage", (req, res) => {
     res.sendFile(__dirname + "/public/homepage.html");
