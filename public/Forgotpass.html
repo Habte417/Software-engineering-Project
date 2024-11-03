@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot Password</title>
+</head>
+<body>
+    <h2>Forgot Password</h2>
+    <form id="requestCodeForm">
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" required />
+        <button type="button" onclick="requestVerificationCode()">Send Verification Code</button>
+    </form>
+
+    <form id="verifyCodeForm" style="display:none;">
+        <label for="code">Enter Verification Code:</label>
+        <input type="text" id="code" required />
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" required />
+        <button type="button" onclick="resetPassword()">Reset Password</button>
+    </form>
+
+    <script>
+        async function requestVerificationCode() {
+            const email = document.getElementById('email').value;
+
+            const response = await fetch('/forgot-password-request', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const data = await response.text();
+
+            if (response.ok) {
+                alert(data);
+                document.getElementById('requestCodeForm').style.display = 'none';
+                document.getElementById('verifyCodeForm').style.display = 'block';
+            } else {
+                alert(data);
+            }
+        }
+
+        async function resetPassword() {
+            const email = document.getElementById('email').value;
+            const verificationCode = document.getElementById('code').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            const response = await fetch('/reset-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, verificationCode, newPassword }),
+            });
+            const data = await response.text();
+
+            if (response.ok) {
+                alert(data);
+                window.location.href = '/'; // Redirect to login page after reset
+            } else {
+                alert(data);
+            }
+        }
+    </script>
+</body>
+</html>
