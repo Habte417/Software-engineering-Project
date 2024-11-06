@@ -1,5 +1,5 @@
 
-.Habtshi{
+.SMSU-Tweet{
     display:flex;
     height: 15vh;
     align-items: center;
@@ -77,6 +77,52 @@ button{
 .new{
     margin-left: -20px;
 }
+
+//Format Date and time
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    margin: 0;
+}
+
+#month, #day, #year, #hour, #minute {
+    font-size: 48px;
+}
+
+#month {
+    margin-right: 10px;
+}
+
+#day {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#year {
+    margin-left: 10px;
+}
+
+#time-am {
+    font-size: 36px;
+    font-weight: normal;
+    margin-left: 200px;
+}
+
+#hour {
+    font-size: 40px;
+}
+
+#minute {
+    font-size: 40px;
+}
+
+#amPm {
+    font-size: 24px;
+}
+
 .second{
     background-image: url(../images/b28dc686-5563-11ef-bb4f-0242ac110002-jpg-hero_image.jpeg);
     background-size: cover; /* Ensures the image covers the entire div */

@@ -3,12 +3,17 @@
  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habtshi Blog</title>
+
+   <!-- Font Awesome -->
+   <script src="https://kit.fontawesome.com/610eb5d846.js" crossorigin="anonymous"></script>
+
+    <title>SMSU-Tweet</title>
+    
     <link rel="stylesheet" href="./css/Homepage.css">
  </head>
  <body>
-    <div class="Habtshi">
-    <h1 class="header" ><a href="#first">HABTSHI BLOG</a></h1>
+    <div class="Logo">
+    <h1 class="header" ><a href="#first">SMSU-Tweet</a></h1>
     <div class="anchors">
     <a class="a" href="#first">Home</a> 
     <a class="a" href="#second">About</a>
@@ -18,8 +23,48 @@
    </div>
    <div class="first" id="first">
    <div class="innerfirst">
-   <h1>Life unfiltered</h1>
-   <h3>Join my journey thorugh experiences</h3>
+
+       <h2>
+         <span id ="datetime">
+         <span id="month"></span> <span id="day"></span>, <span id="year"></span>
+         </span>
+
+       <span id="time-am">
+           <span id="hour"></span>:<span id="minute"></span> <span id="amPm"></span>
+       </span>
+       </h2>
+ 
+       <script>
+         function updateDateTime() {
+           const now = new Date();
+ 
+           const month = now.toLocaleString('en-US', { month: 'long' });
+           const day = now.getDate();
+           const year = now.getFullYear();
+ 
+           let hour = now.getHours();
+           let minute = now.getMinutes();
+ 
+           const amPm = hour >= 12 ? 'pm' : 'am';
+           hour = hour % 12 || 12; // Convert hour '0' to '12'
+ 
+           minute = minute < 10 ? '0' + minute : minute;
+ 
+           // Update HTML content with date and time
+           document.querySelector('#month').textContent = month;
+           document.querySelector('#day').textContent = day;
+           document.querySelector('#year').textContent = year;
+           document.querySelector('#hour').textContent = hour;
+           document.querySelector('#minute').textContent = minute;
+           document.querySelector('#amPm').textContent = amPm;
+         }
+ 
+         // Update every second
+         setInterval(updateDateTime, 1000);
+         updateDateTime(); // initial call to set current time
+       </script>
+
+   <h3>Motivational quote of the day (a random generator will be applied)</h3>
    <div class="buttons">
    <form action="/new">
    <button class="New" >New</button>
@@ -34,7 +79,7 @@
     <div class="innersecond">
       <div class="dinnerS">
       <h2>Sharing insights and reflections</h2>
-      <p>Habte's Blog is a vibrant personal blog where I share the essence of my daily life in Addis Ababa. From school adventures to personal reflections, every post captures the highs and lows of my journey. Join me as I explore the beauty of everyday moments and connect through shared experiences.</p>
+      <p>SMSU-Tweet is a vibrant personal blog where I share the essence of my daily life in Addis Ababa. From school adventures to personal reflections, every post captures the highs and lows of my journey. Join me as I explore the beauty of everyday moments and connect through shared experiences.</p>
       </div>
       <img src="images/e5299dba-3cc2-11e8-9f69-0242ac11000f-jpg-hero_image (1).jpeg" width="200px" height="200px">
    </div>
