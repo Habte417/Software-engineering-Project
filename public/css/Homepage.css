@@ -1,83 +1,165 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.SMSU-Tweet{
-    display:flex;
-    height: 15vh;
+/* General Layout */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #331204;
+    color: white;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.site-title a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.user-controls .logout-button {
+    background-color: #2c2c2c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.user-controls .logout-button:hover {
+    background-color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    border:none;
-    background-color:white;
-    position: fixed;
-    width: 100%;
+    background-color: #563c24;
+    color: white;
+    padding: 50px;
+    height: 90vh;
+}
 
+.hero-text {
+    width: 50%;
 }
-.header{
-    margin-left: 7%;
-}
-.anchors{
-    display:flex;
-    gap:25px;
-    justify-content: space-evenly;
-    margin-right: 5%;
-    
-}
-.anchors button{
-    height:6vh;
-}
-.first{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 85vh;
-    background-image: url(../images/passion-led-us-here.jpg);
-    background-size: cover; /* Ensures the image covers the entire div */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-position: center; /* Centers the image within the div */
-    }
-.innerfirst{
-    color: black;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-align: center;
-    font-size: large;
-    height: 40%;
-    
-}
-.innerfirst h3{
-    font-weight:lighter;
-    width:100%;
-    font-size: xx-large;
-}
-.innerfirst h1{
-    width:100%;
-    font-size: 500%;
+
+.hero-text h2 {
+    font-size: 36px;
     margin-bottom: 20px;
 }
-.buttons{
 
-    margin-top: 10vh;
+.hero-text h3 {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.button-group {
     display: flex;
-    justify-content: center;
-    gap: 200px;
-    
-}
-button{
-    color:whitesmoke;
-    width: 200px;
-    height: 200%;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight:lighter;
-    line-height: 1.25;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-color: #32aa27;
-    background-color: #32aa27;
-    border: none;
-}
-.new{
-    margin-left: -20px;
+    gap: 20px;
 }
 
+.action-button {
+    background-color: #ffcc00;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.hero-image {
+    width: 40%;
+    height: auto;
+}
+
+/* About Section */
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    background-color: #fff;
+}
+
+.about-text {
+    width: 50%;
+}
+
+.about-text h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.about-text p {
+    font-size: 18px;
+}
+
+.about-image {
+    width: 40%;
+    height: auto;
+}
+
+/* Services Section */
+.services-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    background-color: #f9f9f9;
+}
+
+.service-box {
+    width: 30%;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.service-box img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.service-box h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.service-box p {
+    font-size: 16px;
+}
 //Format Date and time
 {
     display: flex;
@@ -106,126 +188,27 @@ button{
 }
 
 #time-am {
-    font-size: 36px;
+    font-size: 22px;
     font-weight: normal;
-    margin-left: 200px;
+    margin-left: 70px;
 }
 
 #hour {
-    font-size: 40px;
-}
-
-#minute {
-    font-size: 40px;
-}
-
-#amPm {
     font-size: 24px;
 }
 
-.second{
-    background-image: url(../images/b28dc686-5563-11ef-bb4f-0242ac110002-jpg-hero_image.jpeg);
-    background-size: cover; /* Ensures the image covers the entire div */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-position: center; /* Centers the image within the div */
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.innersecond img{
-    margin-right: 20%;
-    width: 30%;
-    height: 80vh;
-    float:right;
-}
-.dinnerS{
-    height: 70vh;
-    padding-top:10%;
-    margin-left: 10%;
-    
-    width:25%;
-    float: left;
-}
-.dinnerS h2{
-    font-size: 1.5rem;
-    font-style: normal;
-
-    font-weight: 600;
-    line-height: 1.25;
-    letter-spacing: 0px;
-    text-transform: none;
-    margin-bottom: 15px;
-}
-.dinnerS p{
-    font-weight:lighter;
-    line-height: 1.25;
-    letter-spacing: 1px;
-}
-.thired{
-    background-color: whitesmoke;
-    display: flex;
-    gap:50px;
-    align-items: center;
-    justify-content: center;
-    height: 75vh ;
-
-}
-.boxes{
-    width: 25%;
-    background-color: white;
-    padding-bottom:10px;
-}
-.boxes img{
-    width: 100%;
-    margin-bottom: 20px;
-}
-.boxes h3{
-    padding-left: 10px;
-    font-size: x-large;
-}
-.boxes p{
-    padding-left: 10px;
-    padding-bottom: 10px;
-}
-.en{
-
-    background-color: whitesmoke;
-}
-.a{
-    text-decoration: none;
-    padding:10px;
-    font-size: large;
+#minute {
+    font-size: 24px;
 }
 
-/* h1{
-    font-size: 100px;
-    font-family:'Courier New', Courier, monospace;
-    color:rgb(18, 18, 104);
-} */
-/* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+#amPm {
+    font-size: 18px;
+}
 
-/* .buttons{
-    background-color: rgba(172, 214, 21, 0.877);
-    height:30vh;
-    display:flex;
-    align-items: center;
-    justify-content: space-around;
-} */
-/* button{
-    background-color:rgba(172, 214, 21, 0.877);
-    color:rgb(18, 18, 104);
-    font-size: xx-large;
-    font-family:'Courier New', Courier, monospace;
-    font-weight: bold;
-    border-color: rgb(18, 18, 104);;
-    border-radius:20%;
-    width: 200px;
-    height: 200px;
-} */
-  
+/* Set fixed dimensions for images in the services section */
+.service-box img {
+    width: 100%; /* Ensures the image fills the width of the container */
+    height: 200px; /* Sets a uniform height for all images */
+    object-fit: cover; /* Crops the image to fill the space without stretching */
+    border-radius: 8px; /* Optional: rounds the corners for a polished look */
+}

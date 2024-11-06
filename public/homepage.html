@@ -1,109 +1,105 @@
- <!DOCTYPE html>
- <html lang="en">
- <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-   <!-- Font Awesome -->
-   <script src="https://kit.fontawesome.com/610eb5d846.js" crossorigin="anonymous"></script>
-
     <title>SMSU-Tweet</title>
-    
+    <link rel="stylesheet" href="./css/TryingStuff.css">
     <link rel="stylesheet" href="./css/Homepage.css">
- </head>
- <body>
-    <div class="Logo">
-    <h1 class="header" ><a href="#first">SMSU-Tweet</a></h1>
-    <div class="anchors">
-    <a class="a" href="#first">Home</a> 
-    <a class="a" href="#second">About</a>
-    <a class="a" href="#thired">Services</a>
-    <form action="/Logout"><button class="Log out">Log out</button></form>
-   </div>
-   </div>
-   <div class="first" id="first">
-   <div class="innerfirst">
 
-       <h2>
-         <span id ="datetime">
-         <span id="month"></span> <span id="day"></span>, <span id="year"></span>
-         </span>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/610eb5d846.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header-container">
+        <div class="logo-section">
+            <img src="images/logo.png" alt="Logo" class="logo-image">
+            <h1 class="site-title"><a href="#home">SMSU-Tweet</a></h1>
+        </div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+        </nav>
+        <div class="user-controls">
+            <form action="/Logout">
+                <button class="logout-button">Log out</button>
+            </form>
+        </div>
+    </header>
 
-       <span id="time-am">
-           <span id="hour"></span>:<span id="minute"></span> <span id="amPm"></span>
-       </span>
-       </h2>
- 
-       <script>
-         function updateDateTime() {
-           const now = new Date();
- 
-           const month = now.toLocaleString('en-US', { month: 'long' });
-           const day = now.getDate();
-           const year = now.getFullYear();
- 
-           let hour = now.getHours();
-           let minute = now.getMinutes();
- 
-           const amPm = hour >= 12 ? 'pm' : 'am';
-           hour = hour % 12 || 12; // Convert hour '0' to '12'
- 
-           minute = minute < 10 ? '0' + minute : minute;
- 
-           // Update HTML content with date and time
-           document.querySelector('#month').textContent = month;
-           document.querySelector('#day').textContent = day;
-           document.querySelector('#year').textContent = year;
-           document.querySelector('#hour').textContent = hour;
-           document.querySelector('#minute').textContent = minute;
-           document.querySelector('#amPm').textContent = amPm;
-         }
- 
-         // Update every second
-         setInterval(updateDateTime, 1000);
-         updateDateTime(); // initial call to set current time
-       </script>
+    <main>
+        <section class="hero-section" id="home">
+            <div class="hero-text">
+                <h2>
+                    <span id="datetime">
+                        <span id="month"></span> <span id="day"></span>, <span id="year"></span>
+                    </span>
+                    <span id="time-am">
+                        <span id="hour"></span>:<span id="minute"></span> <span id="amPm"></span>
+                    </span>
+                </h2>
 
-   <h3>Motivational quote of the day (a random generator will be applied)</h3>
-   <div class="buttons">
-   <form action="/new">
-   <button class="New" >New</button>
-   </form>
-   <form action="/Read">
-   <button class="Read">Read</button>
-   </form>
-   </div>
-   </div>
-   </div>
-    <div class="second" id="second">
-    <div class="innersecond">
-      <div class="dinnerS">
-      <h2>Sharing insights and reflections</h2>
-      <p>SMSU-Tweet is a vibrant personal blog where I share the essence of my daily life in Addis Ababa. From school adventures to personal reflections, every post captures the highs and lows of my journey. Join me as I explore the beauty of everyday moments and connect through shared experiences.</p>
-      </div>
-      <img src="images/e5299dba-3cc2-11e8-9f69-0242ac11000f-jpg-hero_image (1).jpeg" width="200px" height="200px">
-   </div>
-    </div>
-      <div class="thired" id="thired">
-      <div class="boxes">
-         <img src="images/download (1).jpg" alt="">
-         <h3>Daily Life Insights</h3>
-         <p>Explore my reflections on daily life experiences</p>
+                <script>
+                    function updateDateTime() {
+                        const now = new Date();
+                        const month = now.toLocaleString('en-US', { month: 'long' });
+                        const day = now.getDate();
+                        const year = now.getFullYear();
+                        let hour = now.getHours();
+                        let minute = now.getMinutes();
+                        const amPm = hour >= 12 ? 'pm' : 'am';
+                        hour = hour % 12 || 12;
+                        minute = minute < 10 ? '0' + minute : minute;
+                        document.querySelector('#month').textContent = month;
+                        document.querySelector('#day').textContent = day;
+                        document.querySelector('#year').textContent = year;
+                        document.querySelector('#hour').textContent = hour;
+                        document.querySelector('#minute').textContent = minute;
+                        document.querySelector('#amPm').textContent = amPm;
+                    }
+                    setInterval(updateDateTime, 1000);
+                    updateDateTime();
+                </script>
 
-      </div>
-      <div class="boxes">
-         <img src="images/download (2).jpg" alt="">
-         <h3>School Life Adventures</h3>
-         <p>Join me on my academic journey filled with lessons.</p>
+                <h3>Just one small positive thought in the morning can change your whole day</h3>
+                <div class="button-group">
+                    <form action="/new">
+                        <button class="action-button">Create</button>
+                    </form>
+                    <form action="/read">
+                        <button class="action-button">Read</button>
+                    </form>
+                </div>
+            </div>
+            <img src="images/images.jpeg" class="hero-image" alt="Hero Image">
+        </section>
 
-      </div>
-      <div class="boxes">
-         <img src="images/images.jpg" alt="">
-         <h3>Personal Reflections</h3>
-         <p>Discover my thoughts on life's ups and downs.</p>
-         
-      </div>
-   </div>
- </body>
- </html>
- 
+        <section class="about-section" id="about">
+            <div class="about-text">
+                <h2>Sharing insights and reflections</h2>
+                <p>SMSU-Tweet is a vibrant blog where I share the essence of my daily life in Addis Ababa. From school adventures to personal reflections, every post captures the highs and lows of my journey.</p>
+            </div>
+            <img src="images/image 2.jpg" alt="About Image" class="about-image">
+        </section>
+
+        <section class="services-section" id="services">
+            <div class="service-box">
+                <img src="images/img3.png" alt="Service Image 1">
+                <h3>Daily Life Insights</h3>
+                <p>Explore my reflections on daily life experiences.</p>
+            </div>
+            <div class="service-box">
+                <img src="images/img4.png" alt="Service Image 2">
+                <h3>School Life Adventures</h3>
+                <p>Join me on my academic journey filled with lessons.</p>
+            </div>
+            <div class="service-box">
+                <img src="images/img5.png" alt="Service Image 3">
+                <h3>Personal Reflections</h3>
+                <p>Discover my thoughts on life's ups and downs.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
