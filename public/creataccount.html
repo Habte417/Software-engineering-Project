@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="./css/login.css">
     <title>Document</title>
     
@@ -25,5 +26,67 @@
     </form>
 </div>
 </div>
+=======
+    <link rel="stylesheet" href="./css/createaccount.css">
+    <title>Create Account</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("create").addEventListener("click", function(event) {
+                event.preventDefault();  // Prevent the form from submitting the traditional way
+
+                const firstname = document.getElementById("firstname").value;
+                const lastname = document.getElementById("lastname").value;
+                const department = document.getElementById("department").value;
+                const faculty = document.getElementById("faculty").value;
+                const interested_about = document.getElementById("interested_about").value;
+
+                // Make a POST request to the back-end to send the verification code
+                fetch('/About', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ firstname, lastname, department, faculty, interested_about }),
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert("Account created successfully");
+                    window.location.href = '/index.html';  // Redirect to the main page
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="main">
+        <h1>Create an Account</h1>
+        <div class="texts">
+            <label for="firstname">First Name</label>
+            <textarea name="firstname" id="firstname"></textarea><br>
+
+            <label for="lastname">Last Name</label>
+            <textarea name="lastname" id="lastname"></textarea><br>
+
+            <label for="department">Department</label>
+            <textarea name="department" id="department"></textarea><br>
+
+            <label for="faculty">Faculty</label>
+            <textarea name="faculty" id="faculty"></textarea><br>
+
+            <label for="interested_about">Interested About</label>
+            <textarea id="interested_about" name="interested_about" maxlength="100" style="height: 60px;"></textarea><br>
+
+            <div class="buttons">
+                <button class="creatA" id="create">Create My Account</button>
+            </div>
+        </div>
+        <div class="login-link">
+            <p>Already have an account? <a href="index.html">Log in</a></p>
+        </div>
+    </div>
+>>>>>>> Stashed changes
 </body>
 </html>
