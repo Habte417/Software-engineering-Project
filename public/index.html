@@ -3,31 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/login.css">
+    <title>Welcome to SMSU</title>
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <div class="main">
-    <form action="/login" method="post">
-    <div class="texts">
-    <label for="">Email</label>
-    <textarea name="username" id="username" ></textarea><br>
-    <label for="">password</label>
-    <textarea name="password" id="password"></textarea><br><br>
-    <div class="buttons">
-    <button class="login">login</button>
-    </form>
-    <form action="create">
-    <button class="creatA">create account</button>
-    </form>
-    <form action="/forgot_password">
-    <button class="forgot"> forgot password</button>
-    </form>
-</div>
-</div>
-<div class="note">
-    <p>Ethiopian culture is a rich tapestry of ancient traditions, strong family ties, and deep spirituality. One of the most iconic aspects is the traditional coffee ceremony, a symbol of hospitality and friendship. This ritual, involving the roasting, grinding, and brewing of coffee beans, is a time-honored practice that brings people together. Meals in Ethiopia often revolve around "injera," a sourdough flatbread made from teff, and shared communally, reflecting the importance of unity and togetherness in Ethiopian society.</p>
- </div>
-</div>
+    <div class="container">
+        <!-- Left Side: Login Form -->
+        <div class="main">
+            <h2>Hi, Welcome Back 👋</h2>
+            <form action="/login" method="post">
+                <div class="texts">
+                    <label for="username">Your School E-mail</label>
+                    <input type="email" name="username" id="username" placeholder="Enter your email"><br>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password"><br><br>
+                    <div class="buttons">
+                        <button type="submit" class="login">Log in</button>
+                        <a href="/create" class="create-account">Create account</a>
+                    </div>
+                </div>
+                <a href="Forgotpass.html" class="forgot-password">Forgot password?</a>
+            </form>
+        </div>
+
+        <!-- Right Side: About Section -->
+        <div class="note">
+            <h2>About Southwest Minnesota State University</h2>
+            <p>Southwest Minnesota State University is a four-year public university offering a high-quality education in the liberal arts and professions to prepare you for a life that is successful both personally and professionally. SMSU has grown into a university of choice with high national rankings, producing scholars who become the leaders, thinkers, and entrepreneurs of the future.</p>
+        </div>
+    </div>
 </body>
 </html>
