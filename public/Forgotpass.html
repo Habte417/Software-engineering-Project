@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Forgot Password</title>
+    <link rel="stylesheet" href="./css/Forgotpass.css">
 </head>
 <body>
-    <h2>Forgot Password</h2>
-    <form id="requestCodeForm">
-        <label for="email">Enter your email:</label>
-        <input type="email" id="email" required />
-        <button type="button" onclick="requestVerificationCode()">Send Verification Code</button>
-    </form>
+    <div class="container">
+        <h2>Forgot Password <span role="img" aria-label="emoji">🤔</span></h2>
+        
+        <form id="requestCodeForm">
+            <label for="email">Enter your school email:</label>
+            <input type="email" id="email" placeholder="Enter your school email" required />
+            <button type="button" onclick="requestVerificationCode()">Send Verification Code</button>
+        </form>
 
     <form id="verifyCodeForm" style="display:none;">
         <label for="code">Enter Verification Code:</label>
@@ -19,6 +22,9 @@
         <input type="password" id="newPassword" required />
         <button type="button" onclick="resetPassword()">Reset Password</button>
     </form>
+
+    <a href="index.html" class="go-back">Go back</a>
+</div>
 
     <script>
         async function requestVerificationCode() {
