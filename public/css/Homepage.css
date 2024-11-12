@@ -59,6 +59,11 @@ body {
     background-color: #333;
 }
 
+/* Hide the burger menu on larger screens */
+.burger-menu {
+    display: none; /* Hidden by default */
+}
+
 /* Hero Section */
 .hero-section {
     display: flex;
@@ -148,7 +153,9 @@ body {
 
 .service-box img {
     width: 100%;
-    height: auto;
+    height: 200px; /* Uniform height */
+    object-fit: cover; /* Crop image */
+    border-radius: 8px; /* Rounded corners */
     margin-bottom: 15px;
 }
 
@@ -160,16 +167,8 @@ body {
 .service-box p {
     font-size: 16px;
 }
-//Format Date and time
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    margin: 0;
-}
 
+/* Date and Time Styling */
 #month, #day, #year, #hour, #minute {
     font-size: 48px;
 }
@@ -193,11 +192,7 @@ body {
     margin-left: 70px;
 }
 
-#hour {
-    font-size: 24px;
-}
-
-#minute {
+#hour, #minute {
     font-size: 24px;
 }
 
@@ -205,10 +200,92 @@ body {
     font-size: 18px;
 }
 
-/* Set fixed dimensions for images in the services section */
-.service-box img {
-    width: 100%; /* Ensures the image fills the width of the container */
-    height: 200px; /* Sets a uniform height for all images */
-    object-fit: cover; /* Crops the image to fill the space without stretching */
-    border-radius: 8px; /* Optional: rounds the corners for a polished look */
+/* Footer */
+footer {
+    background: #3a291a;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer .contact-info {
+    font-size: 14px;
+}
+
+footer .contact-info .social-icons i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #ddd;
+    cursor: pointer;
+}
+
+footer .contact-info .social-icons i:hover {
+    color: #fff;
+}
+
+footer .footer-links {
+    margin: 10px;
+}
+
+footer .footer-links h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+footer .footer-links a {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin: 5px 0;
+}
+
+footer .footer-links a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    /* Show burger menu icon on small screens */
+    .burger-menu {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        color: white;
+    }
+
+    /* Hide main navigation links on small screens */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #331204;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+    }
+
+    .nav-links a, .nav-links .mobile-logout {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid #444;
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Show the menu when it's active */
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* Show the logout button inside the nav-links on mobile */
+    .mobile-logout {
+        display: block;
+    }
 }
