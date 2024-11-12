@@ -3,27 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="new.css">
+    <title>Create Post - SMSU-Tweet</title>
+    <link rel="stylesheet" href="./css/new.css">
+    <link rel="stylesheet" href="./css/TryingStuff.css">
+    <link rel="stylesheet" href="./css/Homepage.css">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/610eb5d846.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Create your blog</h1>
-    <form action="/save" method="post" enctype="multipart/form-data" >
-    <div class="topic">
-    <textarea name="name" id="name" placeholder="write the top"></textarea><br></div>
-    <div class="text">
-    <textarea name="blog" id="blog" placeholder="write your blog" ></textarea><br>
-    </div>
-    <h1>Upload Multiple Images</h1><br><br>
-    <input class="button"type="file" id="imageInput" name="images" accept="image/*" multiple onchange="previewImages()">
-    <br><br>
-    <div id="imagePreviewContainer"></div>
-    <div class="buttons">
-    <button type="submit">save</button>
-    </form>
-    <form action="/backtohomepage">
-    <button>Back to homepage</button>
-    </form>
-    </div>
+    <header class="header-container">
+        <div class="logo-section">
+            <img src="images/logo.png" alt="Logo" class="logo-image">
+            <h1 class="site-title"><a href="#home">SMSU-Tweet</a></h1>
+        </div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+        </nav>
+        <div class="user-controls">
+            <form action="/Logout">
+                <button class="logout-button">Log out</button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h1>Create your post</h1>
+            <form action="/save" method="post" enctype="multipart/form-data">
+                <label for="title">Title</label>
+                <textarea name="title" id="title" placeholder="Write your title"></textarea>
+
+                <label for="content">Content</label>
+                <textarea name="content" id="content" placeholder="Write your blog"></textarea>
+
+                <label for="imageInput">Upload media</label>
+                <input type="file" id="imageInput" name="media" accept="image/*" multiple>
+
+                <div class="buttons">
+                    <button type="submit">Save</button>
+                    <button type="button">Post</button>
+                </div>
+            </form>
+        </section>
+
+        <footer>
+            <div class="contact-info">
+                <p>Contact us:</p>
+                <p>Email: abenee@tefefe.com</p>
+                <p>Phone: +123456789</p>
+                <div class="social-icons">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-linkedin"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h2>Popular links</h2>
+                <a href="#">SMSU Today</a>
+                <a href="#">CIE</a>
+                <a href="#">SAC</a>
+            </div>
+
+            <div class="footer-links">
+                <h2>Quick links</h2>
+                <a href="#">Daily Blog</a>
+                <a href="#">Student Activities</a>
+                <a href="#">Club Activities</a>
+            </div>
+
+            <div class="footer-links">
+                <h2>A-Z</h2>
+                <a href="#">Students</a>
+                <a href="#">Faculty and Professors</a>
+                <a href="#">Departments, Clubs, and Orgs</a>
+            </div>
+        </footer>
+    </main>
 </body>
 </html>
