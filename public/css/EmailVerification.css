@@ -19,7 +19,7 @@ body {
 
 /* Centered Main Container */
 .container {
-    background: rgba(255, 255, 255, 0.6); /* Semi-transparent background */
+    background: rgba(255, 255, 255, 0.65); /* Semi-transparent background */
     border-radius: 8px;
     padding: 30px;
     width: 90%; /* Responsive width */
@@ -70,6 +70,24 @@ button {
 button:hover {
     background-color: #555;
 }
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.login-link a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
 
 /* Media Queries for Responsive Design */
 @media (max-width: 600px) {
