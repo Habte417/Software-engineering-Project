@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account</title>
+    <title>Verify Your SMSU E-mail</title>
+    <link rel="stylesheet" href="./css/EmailVerification.css">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("Submit").addEventListener("click", function(event) {
@@ -39,10 +40,16 @@
     </script>
 </head>
 <body>
-    <label>Email</label>
-    <input id="email" type="text"><br>
-    <label>Password</label>
-    <input id="password" type="password"><br>
-    <button id="Submit">Submit</button>
+    <div class="container">
+        <h2>Verify Your E-mail <span role="img" aria-label="emoji">✅</span></h2>
+        
+        <label for="email">Please Enter Your SMSU E-mail</label>
+        <input id="email" type="text" placeholder="Enter your SMSU e-mail"><br>
+        
+        <label for="password">Create A New Password</label>
+        <input id="password" type="password" placeholder="Enter your new password"><br>
+        
+        <button id="Submit">Submit</button>
+    </div>
 </body>
 </html>
