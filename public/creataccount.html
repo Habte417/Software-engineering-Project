@@ -3,64 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< Updated upstream
-    <link rel="stylesheet" href="./css/login.css">
-    <title>Document</title>
-    <script>
-            document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("create").addEventListener("click", function(event) {
-                event.preventDefault();  // Prevent the form from submitting the traditional way
-
-                const firstname = document.getElementById("firstname").value;
-                const lastname = document.getElementById("lastname").value;
-                const department = document.getElementById("department").value;
-                const faculty = document.getElementById("faculty").value;
-                const interested_about = document.getElementById("interested_about").value;
-               
-
-                    // Make a POST request to the back-end to send the verification code
-                    fetch('/About', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ firstname,lastname,department,faculty,interested_about}),
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        alert("Account created succesfully");
-                        window.location.href = '/index.html';  // Redirect to the verification code page
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
-                    });
-                
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="main">
-    <div class="texts">
-
-    <label for="">First name</label>
-    <textarea name="firstname" id="firstname"></textarea><br>
-    <label for="">last name</label>
-    <textarea name="lastname" id="lastname"></textarea><br>
-    <label for="">department</label>
-    <textarea name="username" id="department"></textarea><br>
-    <label for="">faculty</label>
-    <textarea name="password" id="faculty" ></textarea><br><br>
-    <label for="">interseted about</label>
-    <input type="text" id="interested_about" name="textInput" maxlength="100" style="width: 500px; height: 120px">
-    <div class="buttons">
-    <button class="creatA" id="create">create</button>
-    </div>
-    
-</div>
-</div>
-=======
     <link rel="stylesheet" href="./css/createaccount.css">
     <title>Create Account</title>
     <script>
@@ -121,6 +63,5 @@
             <p>Already have an account? <a href="index.html">Log in</a></p>
         </div>
     </div>
->>>>>>> Stashed changes
 </body>
 </html>
