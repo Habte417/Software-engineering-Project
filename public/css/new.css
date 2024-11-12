@@ -1,0 +1,66 @@
+h1{
+    color:whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    font-size: 70px;
+    font-family:'Courier New', Courier, monospace;
+}
+*{
+    margin:0%;
+    padding: 0%;
+    
+}
+.text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+#blog{
+    padding: 10px 10px;
+    padding-bottom: 0%;
+    width:85%;
+    height: 80%;
+    background-color: white;
+    border-width: 3px;
+    border-color:rgb(18, 18, 104);
+    
+}
+.topic{
+    margin-left: 0%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+#name{
+    padding: 10px 10px;
+    background-color: white;
+    border-color:rgb(18, 18, 104);
+    border-width: 3px;
+    width:85%;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    height: 10vh;
+}
+button{
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    border-width: 2px;
+    border-color:rgb(18, 18, 104);
+    width:200px;
+    height: 50px;
+}
+html{
+    background-image: url(./images/create.jpg);
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image within the div */
+}
