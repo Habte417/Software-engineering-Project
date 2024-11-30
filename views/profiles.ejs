@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profiles</title>
+  <link rel="stylesheet" href="./css/styles.css"> <!-- Keep the external CSS -->
+</head>
+<body>
+  <div class="filter-controls">
+    <label for="filter-name">Filter by Name:</label>
+    <input type="text" id="filter-name" placeholder="Type a name...">
+    
+    <label for="filter-department">Filter by Department:</label>
+    <select id="filter-department">
+      <option value="">All Departments</option>
+      <option value="computer science">computer science</option>
+      <option value="Arts">Arts</option>
+      <option value="Science">Science</option>
+    </select>
+
+    <label for="filter-faculty">Filter by Faculty:</label>
+    <select id="filter-faculty">
+      <option value="">All Faculties</option>
+      <option value="student ">student</option>
+      <option value="Faculty B">Faculty B</option>
+      <option value="Faculty C">Faculty C</option>
+    </select>
+  </div>
+  
+  <div id="profile-container" class="profile-container">
+    <!-- Profiles rendered server-side -->
+    <% files.forEach(function(file) { %>
+      <div class="profile-card" data-id="<%= file.id %>">
+        <img src="<%= file.picture || 'default-profile.png' %>" alt="<%= file.firstname || 'No Name' %>">
+        <h3><%= file.firstname || 'No Name' %></h3>
+        <p id="department"><%= file.department || 'No Department' %></p>
+        <p id="faculty"><%= file.faculty || 'No Faculty' %></p>
+      </div>
+    <% }) %>
+  </div>
+
+  <script>
+    const profileCards = document.querySelectorAll('.profile-card');
+    
+
+profileCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const userId = card.getAttribute('data-id'); // Get the user's ID
+   
+    // Send the ID to the server using fetch
+    fetch('/get-blogs', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId })
+    })
+    .then(response => response.text())
+    .then(html => {
+      // Render the returned HTML (read.ejs) in a new page
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .catch(err => console.error('Error fetching blogs:', err));
+  });
+});
+    const filterNameInput = document.getElementById('filter-name');
+    const filterDepartmentSelect = document.getElementById('filter-department');
+    const filterFacultySelect = document.getElementById('filter-faculty');
+
+    function applyFilters() {
+      const nameFilter = filterNameInput.value.toLowerCase();
+      const departmentFilter = filterDepartmentSelect.value.toLowerCase();
+      const facultyFilter = filterFacultySelect.value.toLowerCase();
+
+      const profileCards = document.querySelectorAll('.profile-card');
+
+      profileCards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        const department = card.querySelector('#department').textContent.toLowerCase();
+        const faculty = card.querySelector('#faculty').textContent.toLowerCase();
+
+        // Check if card matches all filters
+        const matchesName = !nameFilter || name.includes(nameFilter);
+        const matchesDepartment = !departmentFilter || department === departmentFilter;
+        const matchesFaculty = !facultyFilter || faculty === facultyFilter;
+
+        // Show or hide card based on matching criteria
+        if (matchesName && matchesDepartment && matchesFaculty) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Attach event listeners to filters
+    filterNameInput.addEventListener('input', applyFilters);
+    filterDepartmentSelect.addEventListener('change', applyFilters);
+    filterFacultySelect.addEventListener('change', applyFilters);
+  </script>
+</body>
+</html>

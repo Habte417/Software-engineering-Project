@@ -11,6 +11,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const port = 3000;
+let usersId='';
 
 app.use(express.static(__dirname + '/public'));
 
@@ -92,7 +93,6 @@ let pendingVerification = {};
 
 app.post("/created", (req, res) => {
     // Extract the form data from the request body
-    console.log(req.body)
     const { email, password } = req.body;
 
     if (!email.endsWith("@my.smsu.edu")) {
@@ -157,43 +157,51 @@ app.get("/new", (req, res) => {
     res.sendFile(__dirname + "/public/new.html");
 });
 
-// Handling login
 app.post("/login", (req, res) => {
-    db.query("SELECT username, passwords FROM accounts", (err, results) => {
+    db.query("SELECT username, passwords, id FROM accounts", (err, results) => {
         if (err) {
             console.error("Error executing query", err.stack);
+            res.status(500).send("Internal Server Error");
         } else {
-            const credentialsMatch = results.rows.some(
+            // Find the matching user
+            const matchingUser = results.rows.find(
                 userObj => userObj.username === req.body.username && userObj.passwords === req.body.password
             );
 
-            if (credentialsMatch) {
+            if (matchingUser) {
+                // Save the user ID for later use
+                usersId = matchingUser.id;
+
+                // Log or handle the user ID as needed
+                console.log("Logged-in User ID:", usersId);
+
+                // Redirect to homepage
                 res.sendFile(__dirname + "/public/homepage.html");
             } else {
+                // Redirect back to login page on failure
                 res.sendFile(__dirname + "/public/index.html");
             }
         }
     });
-    console.log(req.body);
 });
+
 
 // Handling image uploads and blog saving
 app.post("/save", upload.array('images'), (req, res) => {
     const { name, blog } = req.body;
-    // console.log(req.body);
-     console.log(req.files);
+    // console.log(req.body)
     const images = req.files.map(file => file.buffer); // Convert uploaded files to Buffers (binary data)
     console.log(images);
     db.query(
-        "INSERT INTO blogs (blog_topic, blog, images) VALUES ($1, $2, $3)",
-        [name, blog, images],
+        "INSERT INTO blogs (id,blog_topic, blog, images) VALUES ($1, $2, $3, $4)",
+        [usersId,name, blog, images],
         (err, result) => {
             if (err) {
                 console.error("Error saving blog:", err.stack);
                 res.status(500).send("Error saving blog");
             } else {
                 blogs.push(req.body);
-                console.log(blogs);
+                
                 res.sendFile(__dirname + "/public/new.html");
             }
         }
@@ -201,12 +209,64 @@ app.post("/save", upload.array('images'), (req, res) => {
 });
 
 app.get("/Read", (req, result) => {
-    db.query("SELECT * FROM blogs", (err, res) => {
+    db.query("SELECT * FROM accounts", (err, res) => {
         if (err) {
             console.error("Error executing query", err.stack);
         } else {
-            result.render("Read.ejs", {
+            
+            result.render("profiles.ejs", {
                 files: res.rows
+            });
+        }
+    });
+});
+
+app.post('/blog-interaction', async (req, res) => {
+    const { pk, like, comments } = req.body;
+
+    if (!pk) {
+        return res.status(400).send({ error: 'Blog primary key (pk) is required.' });
+    }
+
+    try {
+        // Increment the like counter if 'like' is true
+        if (like) {
+            await db.query(
+                'UPDATE blogs SET like_counter = like_counter + 1 WHERE pk = $1',
+                [pk]
+            );
+        }
+
+        // Append new comments to the comments array if provided
+        if (comments && comments.length > 0) {
+            await db.query(
+                'UPDATE blogs SET comments = COALESCE(comments, ARRAY[]::TEXT[]) || $1 WHERE pk = $2',
+                [comments, pk]
+            );
+        }
+
+        res.send({ message: 'Blog interaction updated successfully.' });
+    } catch (err) {
+        console.error('Error updating blog:', err);
+        res.status(500).send({ error: 'An error occurred while updating the blog.' });
+    }
+});
+
+
+app.post("/get-blogs", (req, result) => {
+    const userId = req.body.userId;
+    // Get the userId from the query string
+    // Query the database to fetch blogs by the given userId
+    db.query("SELECT * FROM blogs WHERE id = $1", [userId], (err, res) => {
+        if (err) {
+            console.error("Error executing query", err.stack);
+            result.status(500).send("Internal Server Error");
+        } else {
+            
+            // Render the read.ejs file with the filtered blogs
+            result.render("read.ejs", {
+                files: res.rows, // Pass filtered blogs
+                userId: userId  // Pass userId for context (optional)
             });
         }
     });
@@ -311,5 +371,6 @@ app.get("/backtohomepage", (req, res) => {
     res.sendFile(__dirname + "/public/homepage.html");
 });
 app.get("/Logout",(req,res)=>{
-    res.sendFile(__dirname + "/public/index.html");
+    usersId='';
+    res.sendFile(__dirname + "/public/index.html"); 
 });
