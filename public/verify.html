@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Account</title>
+    <link rel="stylesheet" href="/public/css/verify.css">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("Verify").addEventListener("click", function() {
@@ -36,10 +37,24 @@
     
 </head>
 <body>
-    <label>Email</label>
+    <!-- <label>Email</label>
     <input id="email" type="text"><br>
     <label>Enter Verification Code</label>
     <input id="verificationCode" type="text"><br>
-    <button id="Verify">Verify</button>
+    <button id="Verify">Verify</button> -->
+    <div class="container-wrapper">
+        <div class="overlay"></div>
+        <div class="verify-container">
+            <h1>Verify Your SMSU E-mail</h1>
+            <label for="email">Enter Your SMSU E-mail</label>
+            <input id="email" type="email" placeholder="Enter your SMSU e-mail">
+            <label for="verificationCode">Enter your one time code</label>
+            <input id="verificationCode" type="text" placeholder="Enter your OTP">
+            <button id="Verify">Submit</button>
+            <div class="login-link">
+                <p>Already verified? <a href="/login.html">Login here</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
