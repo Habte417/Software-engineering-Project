@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('/public/images/ca_bg_img.jpg') no-repeat center center;
+    background: url('/images/ca_bg_img.jpg') no-repeat center center;
     background-size: cover;
 }
 

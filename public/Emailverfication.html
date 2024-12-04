@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Your SMSU E-mail</title>
+    <title>Use Your SMSU E-mail</title>
     <link rel="stylesheet" href="./css/EmailVerification.css">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -29,7 +29,7 @@
                     .then(response => response.text())
                     .then(data => {
                         alert("Verification code sent to your email. Please enter the code to complete registration.");
-                        window.location.href = '/verify.html';  // Redirect to the verification code page
+                        window.location.href = '/verify';  // Redirect to the verification code page
                     })
                     .catch((error) => {
                         console.error("Error:", error);
@@ -41,7 +41,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Verify Your E-mail <span role="img" aria-label="emoji">✅</span></h2>
+        <h2>Use Your SMSU E-mail <span role="img" aria-label="emoji">✅</span></h2>
         
         <label for="email">Please Enter Your SMSU E-mail</label>
         <input id="email" type="text" placeholder="Enter your SMSU e-mail"><br>
@@ -51,7 +51,7 @@
         
         <button id="Submit">Submit</button>
         <div class="login-link">
-            <p>Already have an account? <a href="index.html">Log in</a></p>
+            <p>Already have an account? <a href="/index">Log in</a></p>
         </div>
     </div>
     

@@ -18,11 +18,11 @@ body {
 }
 
 /* Centered Main Container */
-.container {
+.verify-container {
     background: rgba(255, 255, 255, 0.65); /* Semi-transparent background */
     border-radius: 8px;
     padding: 30px;
-    width: 90%; /* Responsive width */
+    width: 100%; /* Responsive width */
     max-width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -32,7 +32,7 @@ body {
 }
 
 /* Header Styling */
-.container h2 {
+h1 {
     font-size: 22px; /* Responsive font size */
     font-weight: bold;
     margin-bottom: 20px;
@@ -44,7 +44,7 @@ body {
 }
 
 /* Input Fields */
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="email"] {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
@@ -71,6 +71,7 @@ button:hover {
     background-color: #555;
 }
 
+/* Login Link Styling (Optional) */
 .login-link {
     margin-top: 15px;
     font-size: 14px;
@@ -88,14 +89,13 @@ button:hover {
     text-decoration: underline;
 }
 
-
 /* Media Queries for Responsive Design */
 @media (max-width: 600px) {
-    .container {
+    .verify-container {
         padding: 20px;
     }
 
-    h2 {
+    h1 {
         font-size: 1.2rem;
     }
 
@@ -106,12 +106,12 @@ button:hover {
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
-    .container {
+    .verify-container {
         width: 80%;
         padding: 25px;
     }
 
-    h2 {
+    h1 {
         font-size: 1.3rem;
     }
 
