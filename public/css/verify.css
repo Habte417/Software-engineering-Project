@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('/public/images/image 2.jpg') no-repeat center center fixed;
+    background: url('/images/image 2.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #333;
     padding: 20px;

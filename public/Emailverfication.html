@@ -29,7 +29,7 @@
                     .then(response => response.text())
                     .then(data => {
                         alert("Verification code sent to your email. Please enter the code to complete registration.");
-                        window.location.href = '/verify.html';  // Redirect to the verification code page
+                        window.location.href = '/verify';  // Redirect to the verification code page
                     })
                     .catch((error) => {
                         console.error("Error:", error);
@@ -51,7 +51,7 @@
         
         <button id="Submit">Submit</button>
         <div class="login-link">
-            <p>Already have an account? <a href="index.html">Log in</a></p>
+            <p>Already have an account? <a href="/index">Log in</a></p>
         </div>
     </div>
     
