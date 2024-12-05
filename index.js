@@ -14,13 +14,14 @@ const port = 3000;
 
 app.use(express.static(__dirname + '/public'));
 
+
 // PostgreSQL client setup
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
-    database: "blog",
-    password: "Habtshi",  // Update this to the new password
-    port: 5432,
+    database: "Trial Db",
+    password: "Orange20fish@1",  // Update this to the new password
+    port: 5433,
 });
 
 db.connect()
@@ -35,7 +36,7 @@ app.listen(port, () => {
     console.log("listening on port 3000");
 });
 
-app.get("/", (req, res) => {
+app.get("/index", (req, res) => {
     res.sendFile(__dirname + "/public/index.html");
 });
 
@@ -55,8 +56,8 @@ const upload = multer();
 const transporter = nodemailer.createTransport({
     service: 'gmail', // Replace this with your email service provider
     auth: {
-        user: 'thabtamu417@gmail.com',  // Your email
-        pass: 'txyr dbcl mbsp dymw'     // Your email password or an app-specific password if using Gmail
+        user: 'ab.bahiru@gmail.com',  // Your email
+        pass: 'dmyu vxoh payl mnpa'     // Your email password or an app-specific password if using Gmail
     }
 });
 app.post("/About", async (req, res) => {
@@ -107,7 +108,7 @@ app.post("/created", (req, res) => {
 
     // Send the verification code via email
     const mailOptions = {
-        from: 'thabtamu417@gmail.com',  // Replace with your email
+        from: 'ab.bahiry@gmail.com',  // Replace with your email
         to: email,                     // The user's email
         subject: 'Your Verification Code',
         text: `Your verification code is ${verificationCode}`,
@@ -125,6 +126,9 @@ app.post("/created", (req, res) => {
     });
 });
 
+app.get("/verify", (req, res) => {
+    res.sendFile(__dirname + "/public/verify.html");
+});
 
 app.post("/verify-code", (req, res) => {
     const { username, verificationCode } = req.body;
@@ -150,7 +154,9 @@ app.post("/verify-code", (req, res) => {
     }
 });
 
-
+app.get("/createaccount", (req, res) => {
+    res.sendFile(__dirname + "/public/creataccount.html");
+});
 
 
 app.get("/new", (req, res) => {
