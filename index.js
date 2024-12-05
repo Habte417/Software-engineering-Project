@@ -189,7 +189,7 @@ app.post("/login", (req, res) => {
 // Handling image uploads and blog saving
 app.post("/save", upload.array('images'), (req, res) => {
     const { name, blog } = req.body;
-    // console.log(req.body)
+    console.log(req.body)
     const images = req.files.map(file => file.buffer); // Convert uploaded files to Buffers (binary data)
     console.log(images);
     db.query(
