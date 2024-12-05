@@ -108,6 +108,101 @@ body {
     height: auto;
 }
 
+/* Event Calendar Section */
+.event-calendar-section {
+    padding: 55px;
+    background-color: #fff;
+    margin-top: 50px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-list-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-left: 0;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.event-list {
+    width: 95%; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-left: 5px solid #331204;
+    border-radius: 8px;
+}
+
+.event h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #331204;
+}
+
+.event p {
+    font-size: 16px;
+    color: #555;
+}
+
+.event-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Show More Button */
+.show-more-button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.show-more-button:hover {
+    background-color: gray;
+}
+
+/* Submit Event Button */
+.submit-event-button {
+    background-color: lightgray;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.submit-event-button:hover {
+    background-color: #A9A9A9;
+}
+
+
+.calendar-image {
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-link {
+    display: inline-block;
+    width: 40%;
+}
+
+
 /* About Section */
 .about-section {
     display: flex;
