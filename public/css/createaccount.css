@@ -53,8 +53,9 @@ textarea, input[type="text"] {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: none; /* Prevents resizing of textareas */
+    resize: none;
     font-size: 16px;
+    overflow: hidden;
 }
 
 textarea {
