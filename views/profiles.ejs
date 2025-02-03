@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profiles</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <header class="header-container">
+    <div class="logo-section">
+      <img src="images/logo.png" alt="Logo" class="logo-image">
+      <h1 class="site-title"><a href="/backtohomepage">SMSU-Tweet</a></h1>
+    </div>
+    
+    <!-- Burger Menu Icon for Mobile -->
+    <div class="burger-menu" onclick="toggleMenu()">☰</div>
+
+    <nav class="nav-links">
+      <a href="/backtohomepage">Home</a>
+      <a href="homepage.html#about">About</a>
+      <a href="homepage.html#services">Services</a>
+    </nav>
+
+    <div class="user-controls">
+      <form action="/Logout" >
+        <button class="logout-button">Log out</button>
+      </form>
+    </div>
+  </header>
+
+<div class="content-container">
+  <div class="filter-controls">
+    <label for="filter-name">Filter by Name:</label>
+    <input type="text" id="filter-name" placeholder="Search by User Name">
+
+    <label for="filter-department">Filter by Department:</label>
+    <select id="filter-department">
+      <option value="">All Departments</option>
+      <option value="Agriculture">Agriculture</option>
+      <option value="Culinology">Culinology</option>
+      <option value="Hospitality Management">Hospitality Management</option>
+      <option value="Business Innovation & Strategy">Business Innovation & Strategy</option>
+      <option value="English">English</option>
+      <option value="Philosophy">Philosophy</option>
+      <option value="Spanish">Spanish</option>
+      <option value="Humanities">Humanities</option>
+      <option value="Fine Arts">Fine Arts</option>
+      <option value="Communication">Communication</option>
+      <option value="Mathematics">Mathematics</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="Nursing">Nursing</option>
+      <option value="Science">Science</option>
+      <option value="Social Science">Social Science</option>
+      <option value="Physical Education">Physical Education</option>
+    </select>
+
+    <label for="filter-faculty">Filter by Faculty:</label>
+    <select id="filter-faculty">
+      <option value="">All Faculties</option>
+      <option value="Student">Student</option>
+      <option value="Stuff">Stuff</option>
+      <option value="Professor">Professor</option>
+    </select>
+  </div>
+  
+  <div id="profile-container" class="profile-container">
+    <!-- Profiles rendered server-side -->
+    <% files.forEach(function(file) { %>
+      <div class="profile-card" data-id="<%= file.id %>">
+        <img src="/images/ProfileP.jpg" alt="<%= file.firstname || 'No Name' %>" class="profile-photo">
+        <h3><%= file.firstname || 'No Name' %> <%= file.lastname ? file.lastname.charAt(0) + '.' : '' %></h3>
+        <p id="department"><%= file.department || 'No Department' %></p>
+        <!-- Add faculty data here so filters work -->
+        <p id="faculty"><%= file.faculty || 'student' %></p> 
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<section class="above-footer-section">
+  <div class="footer-message">Have a great day!</div>
+  <a href="#top" class="back-to-top-btn">Back to top</a>
+</section>
+
+  <footer>
+    <div class="contact-info">
+      <p>Contact us:</p>
+      <p>Email: abenee@tefefe.com</p>
+      <p>Phone: +123456789</p>
+      <div class="social-icons">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-linkedin"></i>
+        <i class="fab fa-youtube"></i>
+        <i class="fab fa-instagram"></i>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <h2>Popular links</h2>
+      <a href="#">SMSU Today</a>
+      <a href="#">CIE</a>
+      <a href="#">SAC</a>
+    </div>
+
+    <div class="footer-links">
+      <h2>Quick links</h2>
+      <a href="#">Daily Blog</a>
+      <a href="#">Student Activities</a>
+      <a href="#">Club Activities</a>
+    </div>
+
+    <div class="footer-links">
+      <h2>A-Z</h2>
+      <a href="#">Students</a>
+      <a href="#">Faculty and Professors</a>
+      <a href="#">Departments, Clubs, and Orgs</a>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle mobile menu
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Add event listener to profile cards to fetch blogs
+    const profileCards = document.querySelectorAll('.profile-card');
+    profileCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const userId = card.getAttribute('data-id'); 
+        fetch('/get-blogs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId })
+        })
+        .then(response => response.text())
+        .then(html => {
+          document.open();
+          document.write(html);
+          document.close();
+        })
+        .catch(err => console.error('Error fetching blogs:', err));
+      });
+    });
+
+    // Filter logic
+    const filterNameInput = document.getElementById('filter-name');
+    const filterDepartmentSelect = document.getElementById('filter-department');
+    const filterFacultySelect = document.getElementById('filter-faculty');
+
+    function applyFilters() {
+      const nameFilter = filterNameInput.value.toLowerCase().trim();
+      const departmentFilter = filterDepartmentSelect.value.toLowerCase();
+      const facultyFilter = filterFacultySelect.value.toLowerCase();
+
+      const allCards = document.querySelectorAll('.profile-card');
+
+      allCards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        const departmentElem = card.querySelector('#department');
+        const facultyElem = card.querySelector('#faculty');
+
+        const department = departmentElem ? departmentElem.textContent.toLowerCase() : '';
+        const faculty = facultyElem ? facultyElem.textContent.toLowerCase() : '';
+
+        const matchesName = !nameFilter || name.includes(nameFilter);
+        const matchesDepartment = !departmentFilter || department === departmentFilter;
+        const matchesFaculty = !facultyFilter || faculty === facultyFilter;
+
+        if (matchesName && matchesDepartment && matchesFaculty) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Attach event listeners to filters
+    filterNameInput.addEventListener('input', applyFilters);
+    filterDepartmentSelect.addEventListener('change', applyFilters);
+    filterFacultySelect.addEventListener('change', applyFilters);
+  </script>
+</body>
+</html>

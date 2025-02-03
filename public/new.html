@@ -15,12 +15,12 @@
     <header class="header-container">
         <div class="logo-section">
             <img src="images/logo.png" alt="Logo" class="logo-image">
-            <h1 class="site-title"><a href="#home">SMSU-Tweet</a></h1>
+            <h1 class="site-title"><a href="/backtohomepage">SMSU-Tweet</a></h1>
         </div>
         <nav class="nav-links">
             <a href="/backtohomepage">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
+            <a href="homepage.html#about">About</a>
+            <a href="homepage.html#services">Services</a>
         </nav>
         <div class="user-controls">
             <form action="/Logout">
@@ -34,17 +34,16 @@
             <h1>Create your post</h1>
             <form action="/save" method="post" enctype="multipart/form-data">
                 <label for="title">Title</label>
-                <textarea name="title" id="title" placeholder="Write your title"></textarea>
+                <textarea name="name" id="title" placeholder="Write your title"></textarea>
 
-                <label for="content">Content</label>
-                <textarea name="content" id="content" placeholder="Write your blog"></textarea>
+                <label for="blog">Content</label>
+                <textarea name="blog" id="blog" placeholder="Write your tweet"></textarea>
 
-                <label for="imageInput">Upload media</label>
-                <input type="file" id="imageInput" name="media" accept="image/*" multiple>
+                <label for="imageInput">Upload media (Select all desired media at the same time to upload multiple file)</label>
+                <input type="file" id="imageInput" name="images" accept="image/*" multiple>
 
                 <div class="buttons">
-                    <button type="submit">Save</button>
-                    <button type="button">Post</button>
+                    <button type="submit">Post</button>
                 </div>
             </form>
         </section>

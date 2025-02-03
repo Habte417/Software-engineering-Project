@@ -12,11 +12,11 @@
 
                 const email = document.getElementById("email").value;
                 const password = document.getElementById("password").value;
-                const domain = "@my.smsu.edu";
+                const domain = "smsu.edu";
 
                 // Check if the email ends with @my.smsu.edu
                 if (!email.endsWith(domain)) {
-                    alert("Only emails with '@my.smsu.edu' are allowed.");
+                    alert("Only SMSU emails are allowed.");
                 } else {
                     // Make a POST request to the back-end to send the verification code
                     fetch('/created', {
@@ -29,7 +29,7 @@
                     .then(response => response.text())
                     .then(data => {
                         alert("Verification code sent to your email. Please enter the code to complete registration.");
-                        window.location.href = '/verify';  // Redirect to the verification code page
+                        window.location.href = '/verify.html';  // Redirect to the verification code page
                     })
                     .catch((error) => {
                         console.error("Error:", error);

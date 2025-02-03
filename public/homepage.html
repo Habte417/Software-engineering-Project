@@ -9,6 +9,36 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/610eb5d846.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Style for full-screen background video */
+        body, html {
+            margin: 0;
+            padding: 0;
+            /* overflow: hidden; Prevent scrollbars */
+            height: 100%;
+        }
+
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video covers the entire screen */
+            z-index: -1; /* Puts the video behind other content */
+        }
+
+        /* Optional: Content overlay */
+        .content {
+            position: relative;
+            z-index: 1; /* Keeps content on top of the video */
+            color: white;
+            text-align: center;
+            margin-top: 10%;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
     <header class="header-container">
@@ -67,37 +97,46 @@
                     updateDateTime();
                 </script>
 
-                <h3>Just one small positive thought in the morning can change your whole day</h3>
-                <div class="button-group">
+                    <!-- Background Video -->
+                    <video class="video-background" autoplay loop muted playsinline>
+                        <source src="/images/BackGround.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+
+                <h3 style="font-family: 'Roboto Slab', serif; font-weight: 90; font-size: 24px;">
+                    Just one small positive thought in the morning can change your whole day
+                    </h3>
+                  <div class="button-group">
                     <form action="/new">
                         <button class="action-button">Create</button>
                     </form>
-                    <form action="/read">
+                    <form action="/Read">
                         <button class="action-button">Read</button>
                     </form>
                 </div>
             </div>
-            <img src="images/images.jpeg" class="hero-image" alt="Hero Image">
+            <!-- <img src="images/Stanger1.png" class="hero-image" alt="Hero Image"> -->
         </section>
 
         <section class="event-calendar-section">
             <div class="event-list-container">
                 <div class="event-list">
                     <div class="event">
-                        <h4>Ice Skating 7:30pm</h4>
-                        <p>Join us for a fun evening of ice skating at the campus rink!</p>
+                        <h4>President’s Holiday Social 4:30pm</h4>
+                        <p>SMSU President’s Holiday Social, Dec. 11, 4:30-6:30pm, Upper Level CC</p>
                     </div>
                     <div class="event">
-                        <h4>Book Reading 9:00pm</h4>
-                        <p>Come enjoy a cozy book reading session with fellow students.</p>
+                        <h4>Planetarium Holiday Laser Light Show 7:00pm</h4>
+                        <p>The SMSU Planetarium presents the annual Holiday Laser Light Show. Dec. 14.</p>
                     </div>
                     <div class="event">
-                        <h4>International Coffee Hour 3:30pm</h4>
-                        <p>Meet students from around the world over a cup of coffee.</p>
+                        <h4>Women’s Basketball vs Sioux Falls 2:00pm</h4>
+                        <p>Santa Claus Day. Saturday, Dec 21. 2:00-4:00pm RA faciliy</p>
                     </div>
                     <div class="event">
-                        <h4>Creative Conversations: Elizabeth Ghandour 12:00pm</h4>
-                        <p>Join in the Creative Conversations about making a life in the arts!</p>
+                        <h4>Men’s Basketball vs Sioux Falls 4:00pm</h4>
+                        <p>Santa Claus Day. Saturday, Dec 21. 4:00-6:00pm RA faciliy</p>
                     </div>
                     <div class="event-buttons">
                         <a href="https://calendar.smsu.edu/?_ga=2.118072842.2063557263.1733332827-1340114988.1717697447" class="show-more-button">Show More</a>
@@ -113,29 +152,42 @@
 
         <section class="about-section" id="about">
             <div class="about-text">
-                <h2>Sharing insights and reflections</h2>
-                <p>SMSU-Tweet is a vibrant blog where I share the essence of my daily life in Addis Ababa. From school adventures to personal reflections, every post captures the highs and lows of my journey.</p>
+                <h2>SMSU Tweet: Your Campus, Your Voice</h2>
+                <p>SMSU Tweet is the go-to platform where everyone at Southwest Minnesota State University—students, professors, and staff—can come together to share ideas, updates, and experiences. It’s a space that fosters open dialogue, connects our campus community, and celebrates the voices that make SMSU unique. Whether it’s sharing achievements, academic insights, or campus news, SMSU Tweet brings everyone together to engage, inspire, and stay connected.</p>
             </div>
             <img src="images/image 2.jpg" alt="About Image" class="about-image">
         </section>
 
         <section class="services-section" id="services">
             <div class="service-box">
-                <img src="images/img3.png" alt="Service Image 1">
-                <h3>Daily Life Insights</h3>
-                <p>Explore my reflections on daily life experiences.</p>
+                <a href="https://www.smsu.edu/administration/facilities/floor-plans.html" target="_blank">
+                    <img src="images/cm.webp" alt="Service Image 1">
+                </a>
+                <h3>Get SMSU floor plans</h3>
+                <p>Get to where you want to go easier than ever!</p>
             </div>
             <div class="service-box">
-                <img src="images/img4.png" alt="Service Image 2">
-                <h3>School Life Adventures</h3>
-                <p>Join me on my academic journey filled with lessons.</p>
+                <a href="https://eservices.minnstate.edu/esession/authentication.do?campusId=075&postAuthUrl=http%3A%2F%2Feservices.minnstate.edu%2Fstudent-portal%2Fsecure%2Fdashboard.do%3Fcampusid%3D075%26_gl%3D1*8caijn*_gcl_au*MjAxODI4OTE4NS4xNzMzNjQxMDUx*_ga*NTYyOTk0NTYxLjE3MzM2NDEwNTE.*_ga_6NY09TXTN1*MTczMzc1NzA3NC4zLjEuMTczMzc2Mjc2MC42MC4wLjA.%26_ga%3D2.156182971.1640926541.1733757074-562994561.1733641051" target="_blank">
+                    <img src="images/Minnstate.jpg" alt="Service Image 2">
+                </a>
+                <h3>E-Services</h3>
+                <p>Stay on top of your school progress.</p>
             </div>
             <div class="service-box">
-                <img src="images/img5.png" alt="Service Image 3">
-                <h3>Personal Reflections</h3>
-                <p>Discover my thoughts on life's ups and downs.</p>
+                <a href="https://smsumustangs.com/" target="_blank">
+                    <img src="images/Athletics.jpg" alt="Service Image 3">
+                </a>
+                <h3>SMSU Athletics</h3>
+                <p>Home of the Mustangs! Keep up with the Mustangs. </p>
             </div>
         </section>
+        
+
+        <section class="above-footer-section">
+            <div class="footer-message">Have a great day!</div>
+            <a href="#top" class="back-to-top-btn">Back to top</a>
+          </section>
+
                 <footer>
             <div class="contact-info">
                 <p>Contact us:</p>

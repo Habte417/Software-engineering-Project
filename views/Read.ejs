@@ -3,30 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habtshi Blogs</title>
-    <link rel="stylesheet" href="/css/Read.css">
+    <title>SMSU-Tweet</title>
+    <link rel="stylesheet" href="/css/Read.css"> 
 </head>
 <body>
-    <h1>Habtshi Blogs</h1>
+    <header class="header-container">
+        <div class="logo-section">
+            <img src="images/logo.png" alt="Logo" class="logo-image">
+            <h1 class="site-title"><a href="/backtohomepage">SMSU-Tweet</a></h1>
+        </div>
+        <nav class="nav-links">
+            <a href="/backtohomepage">Home</a>
+            <a href="homepage.html#about">About</a>
+            <a href="homepage.html#services">Services</a>
+        </nav>
+        <div class="user-controls">
+            <form action="/Logout">
+                <button class="logout-button">Log out</button>
+            </form>
+        </div>
+    </header>
+
     <div class="blogs">
         <% files.forEach(function(file, index) { %>
-            <button onclick="displayBlog('<%= file.blog %>', <%= JSON.stringify(file.images) %>)">
-                <%= file.blog_topic %>
-            </button><br>
+            <button
+                onclick="displayBlog('<%= file.pk %>', '<%= file.id %>', '<%= file.blog %>', <%= JSON.stringify(file.images) %>, <%= JSON.stringify(file.comments || []) %>)">
+                <%= file.blog_topic || 'Blog Title' %>
+            </button>
         <% }) %>
     </div>
-    <div>
-        <textarea name="main" id="main" placeholder="Your blog" disabled></textarea>
-        <h2>Image Previews:</h2>
+
+    <div class="read-container">
+        <!-- The main tweet content -->
+        <textarea name="main" id="main" placeholder="Select one of the Tweets above you would like to read, if there is one." disabled></textarea>
+
+        <!-- Image Previews -->
+        <h2 class="image-preview-title">Image Previews:</h2>
         <div id="imagePreviewContainer"></div>
+
+        <!-- Like and Comment section -->
+        <div class="interaction-bar">
+            <button id="likeButton" class="like-btn" onclick="toggleLike()">Like</button>
+            <button class="comment-btn" onclick="addComment()">Comment</button>
+            <input type="text" id="newComment" class="comment-input" placeholder="Write your comment">
+        </div>
+
+        <!-- Comments Section -->
+        <h2 class="comments-title">Comments:</h2>
+        <div id="commentList" class="comments-list"></div>
     </div>
 
     <script>
-        function displayBlog(blogContent, images) {
-            // Set the blog content
+        let liked = false;
+        let currentBlogId = null;
+        let currentPk = null;
+
+        async function toggleLike() {
+            const likeButton = document.getElementById('likeButton');
+            liked = !liked;
+            likeButton.classList.toggle('liked', liked);
+            likeButton.textContent = liked ? 'Liked' : 'Like';
+
+            // Send like status to server
+            if (currentBlogId && currentPk) {
+                await sendToServer({
+                    pk: currentPk,
+                    blogId: currentBlogId,
+                    like: liked,
+                    comments: []
+                });
+            }
+        }
+
+        async function displayBlog(pk, blogId, blogContent, images, comments) {
+            currentPk = pk;
+            currentBlogId = blogId;
             document.getElementById('main').value = blogContent;
 
-            // Clear any existing image previews
+            // Clear image previews
             const previewContainer = document.getElementById('imagePreviewContainer');
             previewContainer.innerHTML = '';
 
@@ -34,13 +88,65 @@
             images.forEach(imageBuffer => {
                 const img = document.createElement('img');
                 img.src = 'data:image/png;base64,' + arrayBufferToBase64(imageBuffer.data);
-                img.style.maxWidth = '300px';
-                img.style.margin = '10px';
                 previewContainer.appendChild(img);
             });
+
+            // Display comments
+            const commentList = document.getElementById('commentList');
+            commentList.innerHTML = '';
+            comments.forEach(comment => {
+                const commentBox = createCommentBox(comment);
+                commentList.appendChild(commentBox);
+            });
+
+            // Reset like button
+            liked = false;
+            const likeButton = document.getElementById('likeButton');
+            likeButton.classList.remove('liked');
+            likeButton.textContent = 'Like';
+
+            // Clear comment input
+            document.getElementById('newComment').value = '';
         }
 
-        // Convert binary buffer to base64 string
+        async function addComment() {
+            const newComment = document.getElementById('newComment').value;
+            if (newComment.trim() === '') return;
+
+            const commentList = document.getElementById('commentList');
+            const commentBox = createCommentBox(newComment);
+            commentList.appendChild(commentBox); // add new comment at the bottom
+
+            document.getElementById('newComment').value = ''; // Clear the input
+
+            // Send comment to server
+            if (currentBlogId && currentPk) {
+                await sendToServer({
+                    pk: currentPk,
+                    blogId: currentBlogId,
+                    like: liked,
+                    comments: [newComment]
+                });
+            }
+        }
+
+        function createCommentBox(comment) {
+            const commentBox = document.createElement('div');
+            commentBox.className = 'comment-box';
+
+            const icon = document.createElement('div');
+            icon.className = 'comment-icon';
+            icon.textContent = '👤'; 
+            commentBox.appendChild(icon);
+
+            const content = document.createElement('div');
+            content.className = 'comment-content';
+            content.textContent = comment;
+            commentBox.appendChild(content);
+
+            return commentBox;
+        }
+
         function arrayBufferToBase64(buffer) {
             let binary = '';
             const bytes = new Uint8Array(buffer);
@@ -49,6 +155,23 @@
                 binary += String.fromCharCode(bytes[i]);
             }
             return window.btoa(binary);
+        }
+
+        async function sendToServer(data) {
+            try {
+                const response = await fetch('/blog-interaction', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+                if (!response.ok) {
+                    console.error('Error sending data:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error sending data:', error);
+            }
         }
     </script>
 </body>

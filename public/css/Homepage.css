@@ -44,15 +44,17 @@ body {
     margin: 0 15px;
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .user-controls .logout-button {
     background-color: #2c2c2c;
     color: white;
-    padding: 10px 20px;
-    border: none;
+    padding: 7px 10px;
+    font-size: 20px;
+    border: curved;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 .user-controls .logout-button:hover {
@@ -69,10 +71,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #563c24;
+    background: rgba(0, 0, 0, 0.35);
     color: white;
-    padding: 50px;
-    height: 90vh;
+    padding: 70px;
+    height: 100vh;
 }
 
 .hero-text {
@@ -102,17 +104,53 @@ body {
     cursor: pointer;
     text-transform: uppercase;
 }
+.action-button:hover {
+    background-color: #BA8E23;
+}
 
 .hero-image {
     width: 40%;
     height: auto;
 }
 
+/* Date and Time Styling */
+#month, #day, #year, #hour, #minute {
+    font-size: 48px;
+}
+
+#month {
+    margin-right: 10px;
+}
+
+#day {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#year {
+    margin-left: 10px;
+}
+
+#time-am {
+    font-size: 22px;
+    font-weight: normal;
+    margin-left: 70px;
+}
+
+#hour, #minute {
+    font-size: 24px;
+}
+
+#amPm {
+    font-size: 18px;
+}
+
 /* Event Calendar Section */
 .event-calendar-section {
-    padding: 55px;
-    background-color: #fff;
-    margin-top: 50px; 
+    padding: 200px 55px;
+    background-color: #f9f9f9;
+    margin-top: 0px;
+    /* margin-bottom: 80px;  */
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -134,7 +172,7 @@ body {
 }
 
 .event {
-    background-color: #f9f9f9;
+    background-color: #D3D3D3;
     padding: 20px;
     border-left: 5px solid #331204;
     border-radius: 8px;
@@ -208,8 +246,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: 200px 50px;
+    /* margin-bottom: 70px; */
     background-color: #fff;
+    flex-direction: row-reverse;
 }
 
 .about-text {
@@ -234,7 +274,7 @@ body {
 .services-section {
     display: flex;
     justify-content: space-around;
-    padding: 50px;
+    padding: 140px 20px;
     background-color: #f9f9f9;
 }
 
@@ -263,37 +303,45 @@ body {
     font-size: 16px;
 }
 
-/* Date and Time Styling */
-#month, #day, #year, #hour, #minute {
-    font-size: 48px;
-}
 
-#month {
-    margin-right: 10px;
-}
 
-#day {
-    margin-left: 5px;
-    margin-right: 5px;
-}
+/* Back to top */
+.above-footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 50px 40px;
+    border-top: 1px solid #eee;
+  }
+  
+  .footer-message {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .back-to-top-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .back-to-top-btn:hover {
+    background: #333;
+  }
+  
+  /* Global footer styling */
+  .global-footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
 
-#year {
-    margin-left: 10px;
-}
-
-#time-am {
-    font-size: 22px;
-    font-weight: normal;
-    margin-left: 70px;
-}
-
-#hour, #minute {
-    font-size: 24px;
-}
-
-#amPm {
-    font-size: 18px;
-}
 
 /* Footer */
 footer {
